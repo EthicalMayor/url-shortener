@@ -27,8 +27,16 @@ func runService(servicePath string) {
 	cmd := exec.Command("go", "run", servicePath)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
+
 	err := cmd.Start()
 	if err != nil {
 		fmt.Println("Error starting", servicePath, ":", err)
+		return
+	}
+
+	// wait for the process to finish
+	err = cmd.Wait()
+	if err != nil {
+		fmt.Println("Service", servicePath, "exited with error:", err)
 	}
 }
