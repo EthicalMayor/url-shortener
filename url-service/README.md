@@ -1,0 +1,1 @@
+This service will generate short URLs, store them, and retrieve original URLs.
